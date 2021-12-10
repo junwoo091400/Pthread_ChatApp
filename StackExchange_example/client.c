@@ -12,6 +12,16 @@
 #define MESSAGE_BUFFER 500
 #define USERNAME_BUFFER 10
 
+/*
+TODO
+- Figure out why the connection fails when :
+>>
+./server 5000
+./client 127.0.0.1 5000
+
+It should work!! :-/
+*/
+
 typedef struct {
     char* prompt;
     int socket;

@@ -57,7 +57,7 @@ int main(int argc, char**argv) {
     }
 
     address.sin_family = AF_INET;
-    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_addr.s_addr = inet_addr("127.0.0.1"); //Connect to Local Host! // INADDR_ANY;
     address.sin_port = port;
     socket_fd = socket(AF_INET, SOCK_STREAM, 0);
 
