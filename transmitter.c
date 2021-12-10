@@ -1,10 +1,13 @@
+/*
+Simple Transmiter to send out messages to test client code working
+*/
+
 #include <stdio.h> // printf, fopen 
 #include <stdlib.h> // atoi
 #include <string.h> // strlen
 #include <pthread.h>
 #include <sys/socket.h> // 
 #include <netinet/in.h> // struct sockaddr_in
-//#include <sys/types.h> // isspace
 
 // Global Variables
 #define USER_NAME_LEN 32
@@ -31,12 +34,9 @@ void splashPage () {
 }
 
 // Trims string to remove white spaces
-// There were underflow issues, but was was fixed via :
-// Prevent underflow by letting back be bigger than 's'.
 void trim_string(char *s) {
-	printf("trim_string function called with : %s\n", s);
 	char *back = s + strlen(s); // Navigate to NULL
-	while(back > s && isspace(*--back)); // Find until there's a non-space character
+	while(isspace(*--back)); // Find until there's a non-space character
 	*(back+1) = 0; // terminate string after the valid character
 }
 
@@ -44,16 +44,13 @@ void trim_string(char *s) {
 void *send_msg_handler() {
 	char message[MESSAGE_LEN] = {};
 	char buffer[MESSAGE_LEN + USER_NAME_LEN + 2] = {};
+	int counter = 0;
 	while (1) {
-		fgets(message, sizeof(message), stdin);
-		printf("Got fgets : %s, length : %d\n", message, strlen(message)); // debug
-		fflush(stdout);
-		trim_string(message);
 		
 		if(strcmp(message, "exit") == 0)
 			break;
 		else {
-			int buffer_len = sprintf(buffer, "%s: %s\n", user_name, message);
+			int buffer_len = sprintf(buffer, "%s : %d\n", "Hello this is Transmitter message!", ++counter);
 			if (buffer_len < 0) {
 				continue;
 			}
@@ -61,17 +58,20 @@ void *send_msg_handler() {
 				send(socketfd, buffer, buffer_len, 0);
 			}
 		}
+		
+		sleep(1);
 		// Back to loop
 	}
 	
 	exit(0);
 }
 
+/*
 // Message receive handler
 void *recv_msg_handler() {
 	char message[MESSAGE_LEN] = {};
 	while (1) {
-		int receive = recv(socketfd, message, sizeof(message), 0);
+		int receive = recv(socketfd, message, sizeof(mesage), 0);
 		if (receive > 0) {
 			printf("%s", message); // Print the message
 		}
@@ -79,7 +79,7 @@ void *recv_msg_handler() {
 			break;
 		}
 	}
-}
+}*/
 
 int main (int argc, char **argv) {
 	// Start
@@ -90,19 +90,6 @@ int main (int argc, char **argv) {
 	
 	char *server_ip = "127.0.0.1";
 	int port = atoi(argv[1]);
-	
-	splashPage();
-	printf("Welcome to 'Chat Thyself'\n");
-	
-	// User name recognition
-	printf("Please enter your name : ");
-	fgets(user_name, sizeof(user_name), stdin); // safer than 'gets()' with buffer limit
-	
-	trim_string(user_name);
-	if (strlen(user_name) < 2) {
-		puts("User name should be at least 2 characters long!");
-		exit(0);
-	}
 	
 	// 
 	socketfd = socket(AF_INET, SOCK_STREAM, 0); // Internet Address domain, Bidirectional Bytestream type, 0 for protocol
@@ -128,16 +115,6 @@ int main (int argc, char **argv) {
 	if (pthread_create(&send_msg_thread, NULL, send_msg_handler, NULL) !=0) {
 		puts("Send Message pthread create error");
 		exit(0);
-	}
-	
-	pthread_t recv_msg_thread;
-	if (pthread_create(&recv_msg_thread, NULL, recv_msg_handler, NULL) !=0) {
-		puts("Receive Message pthread create error");
-		exit(0);
-	}
-	
-	while (1) {
-		continue;
 	}
 	
 	close(socketfd); // close socket upon exit

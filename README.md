@@ -1,4 +1,8 @@
 
+## Questions
+1. How does 'connect' function of socket.h work? How does it alter the 'socket file descriptor'?
+- descriptor just holds the return value of the socket() call. So it by itself is only a reference to the connect function. To find the 'socket' it designates.
+
 
 ## Resources
 Online codes
@@ -39,4 +43,5 @@ Etc
 - https://www.howtogeek.com/howto/linux/reset-your-forgotten-ubuntu-password-in-2-minutes-or-less/
 - https://stackoverflow.com/questions/5134779/printing-unsigned-short-values
 - https://manytools.org/hacker-tools/ascii-banner/
+- https://man7.org/linux/man-pages/man3/bzero.3.html
 - 
