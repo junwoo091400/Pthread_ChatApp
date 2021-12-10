@@ -12,6 +12,13 @@ Network
 - https://www.gta.ufrj.br/ensino/eel878/sockets/sockaddr_inman.html
 - https://pubs.opengroup.org/onlinepubs/7908799/xns/recv.html
 - https://pubs.opengroup.org/onlinepubs/7908799/xns/syssocket.h.html
+- https://pubs.opengroup.org/onlinepubs/7908799/xns/socket.html
+- 
+
+Socket Troubleshooting
+- https://stackoverflow.com/questions/16154530/storage-size-of-sockaddr-in-variable-isnt-known
+- http://ps-2.kev009.com/tl/techlib/manuals/adoclib/aixprggd/progcomc/skthdrs.htm
+- 
 
 Pthread
 - https://pubs.opengroup.org/onlinepubs/7908799/xsh/pthread.h.html
@@ -24,7 +31,12 @@ StackOverflow example debugging (Actually CodeReview one)
 - https://stackoverflow.com/questions/16508685/understanding-inaddr-any-for-socket-programming
 - 
 
+String manipulation
+- https://stackoverflow.com/questions/656542/trim-a-string-in-c
+- 
+
 Etc
 - https://www.howtogeek.com/howto/linux/reset-your-forgotten-ubuntu-password-in-2-minutes-or-less/
 - https://stackoverflow.com/questions/5134779/printing-unsigned-short-values
+- https://manytools.org/hacker-tools/ascii-banner/
 - 
