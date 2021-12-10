@@ -1,3 +1,11 @@
+## How to Use
+make Makefile compile
+
+Terminal 1 : ./server 5000
+Terminal 2 : ./client 5000
+Terminal 3 : ./client 5000
+
+
 
 ## Questions
 1. How does 'connect' function of socket.h work? How does it alter the 'socket file descriptor'?
@@ -45,3 +53,10 @@ Etc
 - https://manytools.org/hacker-tools/ascii-banner/
 - https://man7.org/linux/man-pages/man3/bzero.3.html
 - 
+
+## Troubles
+1. Github Authentication
+remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+remote: Please see https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/ for more information.
+fatal: Authentication failed for 'https://github.com/junwoo091400/Pthread_ChatApp.git/'
+
